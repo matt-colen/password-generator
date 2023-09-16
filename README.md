@@ -1,2 +1,3 @@
-# password-generator
- Password generator project
+# random-password-generator
+
+Random password generator project

@@ -1,0 +1,47 @@
+/* General setup */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg-body);
+}
+
+/* Variables */
+
+:root {
+  /* Background Colors - General */
+  --bg-body: #1c1c1c;
+  --bg-btn-primary: #10b981;
+  --bg-btn-secondary: #273549;
+
+  /* Background Colors - Dark Mode */
+  --bg-card-dark: #1f2937;
+
+  /* Background Colors - Light Mode */
+  --bg-card-light: #ecfdf5;
+
+  /* Text Colors - Dark Mode */
+  --text-primary-dark: #fff;
+  --text-emphasis-dark: #4adf86;
+  --text-subheader-dark: #d5d4d8;
+  --text-btn-dark: #55f991;
+
+  /* Text Colors - Light Mode */
+  --text-primary-light: #2b283a;
+  --text-emphasis-light: #10b981;
+  --text-subheader-light: #6b7280;
+  --text-btn-light: #5def92;
+}
+
+/* Utility Classes */
+
+.fully-flexed {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Main Styles */
