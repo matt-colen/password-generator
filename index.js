@@ -167,7 +167,7 @@ const setPasswordCharacters = () => {
 
 // Generates 2 random passwords
 const generatePasswords = (arr) => {
-  const passwordLength = 15;
+  const passwordLength = document.querySelector("#passwordLength").value;
   const password1 = [];
   const password2 = [];
   const passwords = [password1, password2];
@@ -188,4 +188,12 @@ const renderPasswords = (arr) => {
 
 document.querySelector("#generate-btn").addEventListener("click", () => {
   setPasswordCharacters();
+});
+
+// Adds ability to generate passwords when the user presses the "Enter" key
+document.querySelector("#passwordLength").addEventListener("keydown", (e) => {
+  if (e.keyCode === 13) {
+    e.preventDefault();
+    setPasswordCharacters();
+  }
 });

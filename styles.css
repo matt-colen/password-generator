@@ -144,8 +144,8 @@ h6 {
   background: var(--text-emphasis-dark);
 }
 
-.toggle__label {
-  margin-bottom: 31px;
+label {
+  margin: 5px 0 31px 0;
 }
 
 .card__title {
@@ -174,7 +174,8 @@ h6 {
 
 .btn {
   width: 211px;
-  height: 39px;
+  min-height: 39px;
+  word-wrap: break-word;
   margin: 35px 0;
   border: none;
   border-radius: 6px;
@@ -209,4 +210,28 @@ h6 {
 .btns__container {
   display: flex;
   gap: 24px;
+}
+
+#passwordLength {
+  width: 25%;
+  padding: 10px 0 10px 10px;
+  border: 3px solid #fff;
+  border-radius: 5px;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+#passwordLength:focus,
+#passwordLength:hover {
+  border-color: var(--bg-toggle-off);
+  box-shadow: 0 0 5px var(--bg-body);
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  height: 44px;
+  width: 44px;
+  cursor: pointer;
 }
