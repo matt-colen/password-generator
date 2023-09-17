@@ -133,4 +133,59 @@ const symbols = [
   "/",
 ];
 
-const generatePasswords = () => {};
+let useSymbols = document.querySelector("#symbolsToggleSwitch").checked;
+let useNumbers = document.querySelector("#numbersToggleSwitch").checked;
+
+const updatePasswordOptions = () => {
+  useSymbols = document.querySelector("#symbolsToggleSwitch").checked;
+  useNumbers = document.querySelector("#numbersToggleSwitch").checked;
+};
+
+document.querySelector("#symbolsToggleSwitch").addEventListener("click", () => {
+  updatePasswordOptions();
+});
+
+document.querySelector("#numbersToggleSwitch").addEventListener("click", () => {
+  updatePasswordOptions();
+});
+
+// Sets password character options depending on toggle switch selections
+const setPasswordCharacters = () => {
+  let passwordCharacters = [];
+  alphaLowercase.forEach((letter) => passwordCharacters.push(letter));
+  alphaUppercase.forEach((letter) => passwordCharacters.push(letter));
+  if (useSymbols && useNumbers) {
+    symbols.forEach((symbol) => passwordCharacters.push(symbol));
+    numbers.forEach((number) => passwordCharacters.push(number));
+  } else if (useSymbols && !useNumbers) {
+    symbols.forEach((symbol) => passwordCharacters.push(symbol));
+  } else if (!useSymbols && useNumbers) {
+    numbers.forEach((number) => passwordCharacters.push(number));
+  }
+  generatePasswords(passwordCharacters);
+};
+
+// Generates 2 random passwords
+const generatePasswords = (arr) => {
+  const passwordLength = 15;
+  const password1 = [];
+  const password2 = [];
+  const passwords = [password1, password2];
+  passwords.forEach((password) => {
+    for (let i = 0; i < passwordLength; i++) {
+      let randomIndex = Math.floor(Math.random() * arr.length);
+      password.push(arr[randomIndex]);
+    }
+  });
+  renderPasswords(passwords);
+};
+
+// Renders passwords
+const renderPasswords = (arr) => {
+  document.querySelector("#password1").textContent = arr[0].join("");
+  document.querySelector("#password2").textContent = arr[1].join("");
+};
+
+document.querySelector("#generate-btn").addEventListener("click", () => {
+  setPasswordCharacters();
+});

@@ -32,7 +32,7 @@
         </p>
       </header>
       <main>
-        <div class="password-toggle__container flex-column">
+        <div class="password-options__container flex-column">
           <div class="toggle__container">
             <input
               type="checkbox"
@@ -42,7 +42,9 @@
             />
             <div class="toggle__background"></div>
           </div>
-          <label for="symbolsToggleSwitch" class="toggle__label">Symbols</label>
+          <label for="symbolsToggleSwitch" class="toggle__label"
+            >Include Symbols</label
+          >
           <div class="toggle__container">
             <input
               type="checkbox"
@@ -53,14 +55,22 @@
             <div class="toggle__background"></div>
           </div>
           <label for="numbersToggleSwitch" class="toggle__label"
-            >Light Mode</label
+            >Include Numbers</label
           >
         </div>
-        <button class="btn btn--primary">Generate passwords</button>
+        <button id="generate-btn" class="btn btn--primary">
+          Generate passwords
+        </button>
         <hr class="divider--dark" />
         <div class="btns__container">
-          <button class="btn btn--secondary btn--secondary--dark"></button>
-          <button class="btn btn--secondary btn--secondary--dark"></button>
+          <button
+            id="password1"
+            class="btn btn--secondary btn--secondary--dark"
+          ></button>
+          <button
+            id="password2"
+            class="btn btn--secondary btn--secondary--dark"
+          ></button>
         </div>
       </main>
     </div>

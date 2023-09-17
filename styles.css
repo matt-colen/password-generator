@@ -168,8 +168,8 @@ h6 {
   color: var(--text-subheader-light);
 }
 
-.password-toggle__container {
-  margin-top: 31px;
+.password-options__container {
+  margin-top: 51px;
 }
 
 .btn {
@@ -190,7 +190,7 @@ h6 {
 }
 
 .btn--primary {
-  margin-top: 51px;
+  margin-top: 0;
   background: var(--bg-btn-primary);
 }
 
