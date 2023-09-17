@@ -3,24 +3,31 @@
   --bg-body: #1c1c1c;
   --bg-btn-primary: #10b981;
   --bg-btn-secondary: #273549;
+  --bg-toggle-off: #f59e0b;
+  --bg-toggle-on: #048f61;
 
   /* Background Colors - Dark Mode */
   --bg-card-dark: #1f2937;
+  --bg-divider-dark: #2f3e53;
 
   /* Background Colors - Light Mode */
   --bg-card-light: #ecfdf5;
+  --bg-divider-light: #d5d4d8;
+
+  /* Text Colors General */
+  --text-btn-primary: #fff;
 
   /* Text Colors - Dark Mode */
   --text-primary-dark: #fff;
   --text-emphasis-dark: #4adf86;
   --text-subheader-dark: #d5d4d8;
-  --text-btn-dark: #55f991;
+  --text-btn-secondary-dark: #55f991;
 
   /* Text Colors - Light Mode */
   --text-primary-light: #2b283a;
   --text-emphasis-light: #10b981;
   --text-subheader-light: #6b7280;
-  --text-btn-light: #5def92;
+  --text-btn-secondary-light: #5def92;
 }
 
 /* General setup */
@@ -56,26 +63,32 @@ h6 {
 .flex-column {
   display: flex;
   flex-flow: column;
-  gap: 10px;
 }
 
 .full-height {
   height: 100vh;
 }
 
-.emphasis-dark {
+.emphasis--dark {
   color: var(--text-emphasis-dark);
 }
 
-.emphasis-light {
+.emphasis--light {
   color: var(--text-emphasis-light);
 }
 
-/* Main Styles */
+.divider--dark {
+  background: var(--bg-divider-dark);
+}
+
+.divider--light {
+  background: var(--bg-divider-light);
+}
+
+/* Card Styles */
 
 .card {
   padding: 115px 52px;
-  width: fit-content;
 }
 
 .card--dark {
@@ -86,6 +99,53 @@ h6 {
 .card--light {
   background: var(--bg-card-light);
   color: var(--text-primary-light);
+}
+
+/* Toggle Switch */
+
+.toggle__container {
+  position: relative;
+  width: 60px;
+  height: 30px;
+}
+
+.toggle__switch,
+.toggle__background {
+  position: absolute;
+  top: 0;
+  height: 100%;
+}
+
+.toggle__switch {
+  appearance: none; /* Overrides default checkbox styling */
+  width: 50%;
+  background: var(--bg-toggle-off);
+  border-radius: 50%;
+  transition: all 0.5s;
+  z-index: 2;
+  cursor: pointer;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+}
+
+/* Styles the checked (on) state */
+.toggle__switch:checked {
+  left: 50%;
+  background: var(--bg-toggle-on);
+}
+
+.toggle__background {
+  width: 100%;
+  border-radius: 15px;
+  background: var(--bg-btn-secondary);
+}
+
+/* Styles the checked (on) state of the background */
+.toggle__switch:checked + .toggle__background {
+  background: var(--text-emphasis-dark);
+}
+
+.toggle__label {
+  margin-bottom: 31px;
 }
 
 .card__title {
@@ -100,10 +160,53 @@ h6 {
   line-height: 28px;
 }
 
-.card__subtitle-dark {
+.card__subtitle--dark {
   color: var(--text-subheader-dark);
 }
 
-.card__subtitle-light {
+.card__subtitle--light {
   color: var(--text-subheader-light);
+}
+
+.password-toggle__container {
+  margin-top: 31px;
+}
+
+.btn {
+  width: 211px;
+  height: 39px;
+  margin: 35px 0;
+  border: none;
+  border-radius: 6px;
+  padding: 9px 16px;
+  color: var(--text-btn-primary);
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn:hover {
+  opacity: 0.85;
+}
+
+.btn--primary {
+  margin-top: 51px;
+  background: var(--bg-btn-primary);
+}
+
+.btn--secondary {
+  background: var(--bg-btn-secondary);
+}
+
+.btn--secondary--dark {
+  color: var(--text-btn-secondary-dark);
+}
+
+.btn--secondary--light {
+  color: var(--text-btn-secondary-light);
+}
+
+.btns__container {
+  display: flex;
+  gap: 24px;
 }

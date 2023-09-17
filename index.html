@@ -17,16 +17,51 @@
   <body class="fully-flexed full-height">
     <div class="card card--dark">
       <header class="flex-column">
+        <div class="toggle__container">
+          <input type="checkbox" id="modeToggleSwitch" class="toggle__switch" />
+          <div class="toggle__background"></div>
+        </div>
+        <label for="modeToggleSwitch" class="toggle__label">Light Mode</label>
         <h1 class="card__title">
           Generate a
-          <span class="emphasis-dark">random password</span>
+          <br />
+          <span class="emphasis--dark">random password</span>
         </h1>
-        <p class="card__subtitle card__subtitle-dark">
+        <p class="card__subtitle card__subtitle--dark">
           Never use an insecure password again
         </p>
       </header>
       <main>
-        <button class="btn--primary">Generate passwords</button>
+        <div class="password-toggle__container flex-column">
+          <div class="toggle__container">
+            <input
+              type="checkbox"
+              id="symbolsToggleSwitch"
+              class="toggle__switch"
+              checked
+            />
+            <div class="toggle__background"></div>
+          </div>
+          <label for="symbolsToggleSwitch" class="toggle__label">Symbols</label>
+          <div class="toggle__container">
+            <input
+              type="checkbox"
+              id="numbersToggleSwitch"
+              class="toggle__switch"
+              checked
+            />
+            <div class="toggle__background"></div>
+          </div>
+          <label for="numbersToggleSwitch" class="toggle__label"
+            >Light Mode</label
+          >
+        </div>
+        <button class="btn btn--primary">Generate passwords</button>
+        <hr class="divider--dark" />
+        <div class="btns__container">
+          <button class="btn btn--secondary btn--secondary--dark"></button>
+          <button class="btn btn--secondary btn--secondary--dark"></button>
+        </div>
       </main>
     </div>
   </body>
