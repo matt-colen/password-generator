@@ -1,3 +1,5 @@
+/* VARIABLES  */
+
 :root {
   /* Background Colors - General */
   --bg-body: #1c1c1c;
@@ -28,9 +30,27 @@
   --text-emphasis-light: #10b981;
   --text-subheader-light: #6b7280;
   --text-btn-secondary-light: #5def92;
+
+  /* Border Radius  */
+  --radius-soft: 5px;
+  --radius-round: 50%;
+
+  /* Transitions  */
+  --transition-normal: all 0.5s;
+  --transition-quick: all 0.2s;
+
+  /* Box Shadow  */
+  --box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+
+  /* Spacing */
+  --spacing-xs: 8px;
+  --spacing-s: 16px;
+  --spacing-m: 30px;
+  --spacing-l: 50px;
+  --spacing-xl: 100px;
 }
 
-/* General setup */
+/* GENERAL */
 
 * {
   box-sizing: border-box;
@@ -49,14 +69,18 @@ h4,
 h5,
 h6 {
   font-family: "Karla", sans-serif;
-  margin: 0;
+  font-weight: bold;
 }
 
-/* Utility Classes */
+input,
+button {
+  cursor: pointer;
+}
+
+/* UTILITY */
 
 .click-disabled {
-  /* Used to disable click on icon inside password btn. */
-  pointer-events: none;
+  pointer-events: none; /* Disables click-ability on icon inside of the password buttons. */
 }
 
 .fully-flexed {
@@ -86,11 +110,11 @@ h6 {
   background: var(--bg-divider-light);
 }
 
-/* Card Container Styles */
+/*  CARD CONTAINER */
 
 .card__container {
-  padding: 50px;
-  border-radius: 5px;
+  padding: var(--spacing-l);
+  border-radius: var(--radius-soft);
 }
 
 .card__container--dark {
@@ -103,7 +127,7 @@ h6 {
   color: var(--text-primary-light);
 }
 
-/* Toggle Switch */
+/* TOGGLE SWITCHES */
 
 .toggle__container {
   position: relative;
@@ -120,16 +144,15 @@ h6 {
 
 .toggle__switch {
   appearance: none; /* Overrides default checkbox styling */
-  width: 50%;
+  width: var(--radius-round);
+  border-radius: var(--radius-round);
   background: var(--bg-toggle-off);
-  border-radius: 50%;
-  transition: all 0.5s;
-  z-index: 2;
-  cursor: pointer;
-  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+  transition: var(--transition-normal);
+  z-index: 2; /* Puts switch on top */
+  box-shadow: var(--box-shadow);
 }
 
-/* Styles the checked (on) state */
+/* STYLES FOR CHECKED (ON) STATE */
 .toggle__switch:checked {
   left: 50%;
   background: var(--bg-toggle-on);
@@ -137,7 +160,7 @@ h6 {
 
 .toggle__background {
   width: 100%;
-  border-radius: 15px;
+  border-radius: 15px; /* Adds pill shape */
   background: var(--bg-btn-secondary);
 }
 
@@ -147,13 +170,14 @@ h6 {
 }
 
 label {
-  margin: 5px 0 31px 0;
+  margin: var(--spacing-xs) 0 var(--spacing-m);
 }
+
+/* CARD HEADER  */
 
 .card__title {
   font-size: 2.5rem;
   line-height: 1;
-  font-weight: bold;
   letter-spacing: -1px;
 }
 
@@ -170,22 +194,20 @@ label {
   color: var(--text-subheader-light);
 }
 
-.password-options__container {
-  margin-top: 51px;
-}
+/* BUTTONS  */
 
 .btn {
-  width: 211px;
+  width: 250px;
+  min-width: 250px;
   min-height: 39px;
-  margin: 35px 0;
+  margin: var(--spacing-m) 0;
   border: none;
-  border-radius: 6px;
-  padding: 9px 16px;
+  border-radius: var(--radius-soft);
+  padding: var(--spacing-xs) var(--spacing-s);
   color: var(--text-btn-primary);
   font-size: 1rem;
-  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
-  cursor: pointer;
-  transition: all 0.2s;
+  box-shadow: var(--box-shadow);
+  transition: var(--transition-quick);
 }
 
 .btn:hover {
@@ -195,6 +217,8 @@ label {
 .btn--primary {
   margin-top: 0;
   background: var(--bg-btn-primary);
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 .btn--secondary {
@@ -209,26 +233,30 @@ label {
   color: var(--text-btn-secondary-light);
 }
 
+/* PASSWORD OPTIONS SECTION */
+
+.password-options__container {
+  margin-top: var(--spacing-l);
+}
+
 .passwords__container {
   display: flex;
-  gap: 24px;
+  gap: var(--spacing-m);
 }
 
-#password-length {
-  width: 25%;
-  padding: 10px 0 10px 10px;
+.password-length {
+  width: 125px;
+  padding: var(--spacing-xs) 0 var(--spacing-xs) var(--spacing-xs);
   border: 3px solid #fff;
-  border-radius: 5px;
-  font-size: 1rem;
-  outline: none;
-  transition: all 0.2s;
-  cursor: pointer;
+  border-radius: var(--radius-soft);
+  font-size: 1.5rem;
+  transition: var(--transition-quick);
 }
 
-#password-length:focus,
-#password-length:hover {
+.password-length:focus,
+.password-length:hover {
   border-color: var(--bg-toggle-off);
-  box-shadow: 0 0 5px var(--bg-body);
+  box-shadow: var(--box-shadow);
 }
 
 input[type="number"]::-webkit-inner-spin-button,
@@ -238,50 +266,55 @@ input[type="number"]::-webkit-outer-spin-button {
   cursor: pointer;
 }
 
+/* PASSWORD BUTTONS  */
+
 .password-btn {
   letter-spacing: 2px;
   min-height: 75px;
   flex-flow: column;
-  gap: 10px;
+  gap: var(--spacing-s);
   white-space: normal;
-  word-break: break-word; /* Break words when necessary */
+  word-break: break-word; /* Breaks parts of the password when necessary */
 }
 
 .password-btn--copied {
   background: var(--bg-btn-primary);
 }
 
-@media only screen and (max-width: 600px) {
+/* MEDIA QUERIES  */
+
+@media screen and (max-width: 700px) {
   html {
     font-size: 15px;
   }
-  body {
-    padding: 16px;
-  }
+  body,
   .card__container {
-    width: 100%;
-    padding: 16px;
+    padding: var(--spacing-s);
   }
+  .card__container,
   .btn {
     width: 100%;
   }
-  .btns__container {
+  .passwords__container {
     flex-flow: column;
     align-items: center;
     gap: 0;
   }
+  .btn--primary,
+  .btn--secondary {
+    min-width: min-content;
+  }
   .btn--primary {
-    display: block;
-    margin: 31px auto 31px;
-    justify-self: center;
+    height: 59px;
+    margin: var(--spacing-m) auto;
   }
   .btn--secondary {
-    margin-top: 25px;
+    margin-top: var(--spacing-m);
     margin-bottom: 0;
   }
 }
 
-@media only screen and (min-width: 601px) {
+@media screen and (min-width: 701px) {
   body {
     height: 100vh;
   }

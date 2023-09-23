@@ -44,7 +44,7 @@
       <!-- Card main content  -->
       <main>
         <!-- Card password options  -->
-        <div class="password-options__container flex-column">
+        <section class="password-options__container flex-column">
           <!-- Symbols toggle  -->
           <div class="toggle__container">
             <input
@@ -74,9 +74,16 @@
           >
 
           <!-- Password length toggle  -->
-          <input id="password-length" type="number" min="8" value="10" />
+          <input
+            class="password-length"
+            id="password-length"
+            type="number"
+            min="8"
+            max="100"
+            value="10"
+          />
           <label for="password-length">Length of Password</label>
-        </div>
+        </section>
 
         <!-- Generate password btn  -->
         <button id="generate-btn" class="btn btn--primary">
@@ -87,7 +94,7 @@
         <hr class="divider--dark" />
 
         <!-- Passwords container  -->
-        <div class="passwords__container">
+        <section class="passwords__container">
           <button
             id="password-1"
             class="btn btn--secondary btn--secondary--dark password-btn fully-flexed"
@@ -98,7 +105,7 @@
             class="btn btn--secondary btn--secondary--dark password-btn fully-flexed"
             title="Copy password"
           ></button>
-        </div>
+        </section>
       </main>
     </div>
   </body>
