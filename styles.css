@@ -94,20 +94,50 @@ button {
   flex-flow: column;
 }
 
-.emphasis--dark {
+/* DARK MODE */
+
+.dark-mode .emphasis {
   color: var(--text-emphasis-dark);
 }
 
-.emphasis--light {
-  color: var(--text-emphasis-light);
-}
-
-.divider--dark {
+.dark-mode .divider {
   background: var(--bg-divider-dark);
 }
 
-.divider--light {
+.dark-mode .card__container {
+  background: var(--bg-card-dark);
+  color: var(--text-primary-dark);
+}
+
+.dark-mode .card__subtitle {
+  color: var(--text-subheader-dark);
+}
+
+.dark-mode .btn--secondary {
+  color: var(--text-btn-secondary-dark);
+}
+
+/* LIGHT MODE  */
+
+.light-mode .emphasis {
+  color: var(--text-emphasis-light);
+}
+
+.light-mode .divider {
   background: var(--bg-divider-light);
+}
+
+.light-mode .card__container {
+  background: var(--bg-card-light);
+  color: var(--text-primary-light);
+}
+
+.light-mode .card__subtitle {
+  color: var(--text-subheader-light);
+}
+
+.light-mode .btn--secondary {
+  color: var(--text-btn-secondary-light);
 }
 
 /*  CARD CONTAINER */
@@ -115,16 +145,6 @@ button {
 .card__container {
   padding: var(--spacing-l);
   border-radius: var(--radius-soft);
-}
-
-.card__container--dark {
-  background: var(--bg-card-dark);
-  color: var(--text-primary-dark);
-}
-
-.card__container--light {
-  background: var(--bg-card-light);
-  color: var(--text-primary-light);
 }
 
 /* TOGGLE SWITCHES */
@@ -186,14 +206,6 @@ label {
   line-height: 28px;
 }
 
-.card__subtitle--dark {
-  color: var(--text-subheader-dark);
-}
-
-.card__subtitle--light {
-  color: var(--text-subheader-light);
-}
-
 /* BUTTONS  */
 
 .btn {
@@ -223,14 +235,6 @@ label {
 
 .btn--secondary {
   background: var(--bg-btn-secondary);
-}
-
-.btn--secondary--dark {
-  color: var(--text-btn-secondary-dark);
-}
-
-.btn--secondary--light {
-  color: var(--text-btn-secondary-light);
 }
 
 /* PASSWORD OPTIONS SECTION */

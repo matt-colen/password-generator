@@ -1,34 +1,8 @@
-// IMPORTS
-import * as characters from "./characters.js";
-
-// DARK/LIGHT MODE TOGGLE
-let lightMode = false;
-
-// Function to toggle light/dark mode
+// Toggles light/dark mode
 const toggleMode = () => {
-  const targetString = lightMode ? "--light" : "--dark"; // Determines the class substring needing replaced
-  const replacementString = !lightMode ? "--light" : "--dark"; // Determines the replacement class substring
-  // Selects all elements that include the target class substring
-  const targetElements = document.querySelectorAll(
-    `[class*="${targetString}"]`
-  );
-  // Loops through the selected elements
-  targetElements.forEach((element) => {
-    const currentClassName = element.className; // Gets the current class name for the matching elements
-    // Creates a new class name by replacing the matching substring
-    const newClassName = currentClassName.replace(
-      new RegExp(targetString, "g"),
-      replacementString
-    );
-    // Updates the element's className attribute
-    element.className = newClassName;
-  });
-  updateMode();
-};
-
-// Function that updates the mode's state
-const updateMode = () => {
-  lightMode ? (lightMode = false) : (lightMode = true);
+  const body = document.body;
+  body.classList.toggle("dark-mode");
+  body.classList.toggle("light-mode");
 };
 
 // Adds an event listener for mode toggle button
@@ -36,108 +10,88 @@ document.querySelector("#mode-toggle").addEventListener("click", () => {
   toggleMode();
 });
 
-// HANDLING THE PASSWORD OPTIONS
-let passwordsGenerated = false;
+// RANDOM PASSWORD GENERATOR
 
-// Global variables tracking the password options
-let useSymbols = true;
-let useNumbers = true;
-
-// Function that updates the state of the password options
-const updatePasswordOptions = (e) => {
-  e.target.id === "symbols-toggle"
-    ? (useSymbols = !useSymbols)
-    : (useNumbers = !useNumbers);
+// Constants for elements and character sets
+const toggleButtons = document.querySelectorAll(".toggle--options");
+const passwordButtons = document.querySelectorAll(".password-btn");
+const passwordLengthInput = document.querySelector("#password-length");
+const generateButton = document.querySelector("#generate-btn");
+const passwordContainers = [
+  document.querySelector("#password-1"),
+  document.querySelector("#password-2"),
+];
+const characters = {
+  alphaLowercase: "abcdefghijklmnopqrstuvwxyz",
+  alphaUppercase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+  symbols: "!@#$%^&*()_+-=[]{}|;:'\"<>,.?/",
+  numbers: "0123456789",
+  copyIcon: `<svg class="click-disabled" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M20.5 9.5H11.5C10.3954 9.5 9.5 10.3954 9.5 11.5V20.5C9.5 21.6046 10.3954 22.5 11.5 22.5H20.5C21.6046 22.5 22.5 21.6046 22.5 20.5V11.5C22.5 10.3954 21.6046 9.5 20.5 9.5Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M5.5 15.5H4.5C3.96957 15.5 3.46086 15.2893 3.08579 14.9142C2.71071 14.5391 2.5 14.0304 2.5 13.5V4.5C2.5 3.96957 2.71071 3.46086 3.08579 3.08579C3.46086 2.71071 3.96957 2.5 4.5 2.5H13.5C14.0304 2.5 14.5391 2.71071 14.9142 3.08579C15.2893 3.46086 15.5 3.96957 15.5 4.5V5.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>`,
 };
 
-// Event listeners for the symbol/number toggle buttons
-document.querySelectorAll(".toggle--options").forEach((elem) => {
-  elem.addEventListener("click", (e) => {
-    updatePasswordOptions(e);
-  });
-});
+// Generates a random password
+const generateRandomPassword = (length, allowedCharacters) => {
+  let password = "";
 
-// Function that sets the password character options depending on the toggle switch selections
-const setPasswordCharacters = () => {
-  // Initial setup of password character options
-  const passwordCharacters = [];
-  // Pushes all the alpha characters to the array
-  characters.alphaLowercase.forEach((letter) =>
-    passwordCharacters.push(letter)
-  );
-  characters.alphaUppercase.forEach((letter) =>
-    passwordCharacters.push(letter)
-  );
-  // Pushes the selected optional characters to the array
-  if (useSymbols && useNumbers) {
-    characters.symbols.forEach((symbol) => passwordCharacters.push(symbol));
-    characters.numbers.forEach((number) => passwordCharacters.push(number));
-  } else if (useSymbols && !useNumbers) {
-    characters.symbols.forEach((symbol) => passwordCharacters.push(symbol));
-  } else if (!useSymbols && useNumbers) {
-    characters.numbers.forEach((number) => passwordCharacters.push(number));
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * allowedCharacters.length);
+    password += allowedCharacters[randomIndex];
   }
-  generatePasswords(passwordCharacters);
+
+  return password;
 };
 
-// GENERATING THE PASSWORDS
-let password1;
-let password2;
+// Sets the password characters based on user-selected options
+const setPasswordCharacters = () => {
+  const passwordLength = +passwordLengthInput.value;
+  let useSymbols = document.querySelector("#symbols-toggle").checked;
+  let useNumbers = document.querySelector("#numbers-toggle").checked;
+  const allowedCharacters = [
+    characters.alphaLowercase,
+    characters.alphaUppercase,
+  ];
 
-// Function that generates 2 random passwords
-const generatePasswords = (arr) => {
-  const passwordLength = document.querySelector("#password-length").value; // Sets desired password length
-  const password1 = [];
-  const password2 = [];
-  const passwords = [password1, password2];
-  passwords.forEach((password) => {
-    for (let i = 0; i < passwordLength; i++) {
-      let randomIndex = Math.floor(Math.random() * arr.length);
-      password.push(arr[randomIndex]);
-    }
-  });
-  resetBtnStyling();
+  if (useSymbols) allowedCharacters.push(characters.symbols);
+  if (useNumbers) allowedCharacters.push(characters.numbers);
+  const passwords = passwordContainers.map(() =>
+    generateRandomPassword(passwordLength, allowedCharacters.join(""))
+  );
   renderPasswords(passwords);
 };
 
-// RENDERING THE PASSWORDS
-
-// Function that renders the passwords
-const renderPasswords = (arr) => {
-  // Adds a new copy icon
-  const copyIcon = characters.copyIcon;
-  const password1El = document.querySelector("#password-1");
-  const password2El = document.querySelector("#password-2");
-  // Updating global variable to current pw values
-  password1 = arr[0].join("");
-  password2 = arr[1].join("");
-  // Updating the text content for the current pw values
-  password1El.textContent = password1;
-  password2El.textContent = password2;
-  // Adds the copy icon to the new passwords
-  password1El.innerHTML += copyIcon;
-  password2El.innerHTML += copyIcon;
-  // Updates state of password generation
-  passwordsGenerated = true;
+// Renders passwords
+const renderPasswords = (passwords) => {
+  passwords.forEach((password, index) => {
+    const container = passwordContainers[index];
+    container.textContent = password;
+    container.innerHTML += `<span class="copy-icon click-disabled">${characters.copyIcon}</span>`;
+  });
+  resetBtnStyling();
 };
 
-// Adds event listener for the generate pw btn
-document.querySelector("#generate-btn").addEventListener("click", () => {
-  setPasswordCharacters();
-});
-// Adds event listener for the "Enter" key on the num input field
-document.querySelector("#password-length").addEventListener("keydown", (e) => {
+// Event listeners
+generateButton.addEventListener("click", setPasswordCharacters);
+
+passwordLengthInput.addEventListener("keydown", (e) => {
   if (e.keyCode === 13) {
     e.preventDefault();
     setPasswordCharacters();
   }
 });
 
-// COPY ON CLICK FEATURE
+// Event delegation for password buttons
+document.body.addEventListener("click", (e) => {
+  if (e.target.classList.contains("password-btn")) {
+    copyOnClick(e.target);
+  }
+});
 
 // Copies clicked password to the clipboard
 const copyOnClick = (btn) => {
-  if (passwordsGenerated) {
+  if (btn.textContent) {
     const textToCopy = btn.textContent;
     navigator.clipboard.writeText(textToCopy);
     showCopied(btn);
@@ -147,39 +101,14 @@ const copyOnClick = (btn) => {
 // Adds styling to clicked password button
 const showCopied = (clickedBtn) => {
   clickedBtn.classList.add("password-btn--copied");
-  clickedBtn.id === "password-1"
-    ? (password1 = clickedBtn.textContent)
-    : (password2 = clickedBtn.textContent);
-  clickedBtn.textContent = "Copied";
+  clickedBtn.innerHTML += `<span class="copied">Copied</span>`;
   clickedBtn.disabled = true;
-  restoreOtherPassword(clickedBtn);
 };
 
-const restoreOtherPassword = (clickedBtn) => {
-  const copyIcon = characters.copyIcon;
-  if (clickedBtn.id === "password-1") {
-    const password2El = document.querySelector("#password-2");
-    password2El.textContent = password2;
-    password2El.innerHTML += copyIcon;
-  } else {
-    const password1El = document.querySelector("#password-1");
-    password1El.textContent = password1;
-    password1El.innerHTML += copyIcon;
-  }
-};
-
-// Set's password btns to default styling
+// Sets password buttons to default styling
 const resetBtnStyling = () => {
-  document.querySelectorAll(".password-btn").forEach((btn) => {
+  passwordButtons.forEach((btn) => {
     btn.classList.remove("password-btn--copied");
     btn.disabled = false;
   });
 };
-
-// Adds event listeners for the password buttons
-document.querySelectorAll(".password-btn").forEach((btn) => {
-  btn.addEventListener("click", () => {
-    resetBtnStyling();
-    copyOnClick(btn);
-  });
-});
